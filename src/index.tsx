@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { setupStore } from "./store/store";
+import "./fireBaze";
 
 const store = setupStore();
 
