@@ -1,8 +1,9 @@
 import React from "react";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
-export default function LogIn() {
+export default function LogInGoogle() {
 	const navigate = useNavigate();
 	const logInWGoogle = () => {
 		const provider = new GoogleAuthProvider();
@@ -30,8 +31,8 @@ export default function LogIn() {
 			});
 	};
 	return (
-		<div>
-			<button onClick={logInWGoogle}>google</button>
-		</div>
+		<Button onClick={logInWGoogle} variant={"contained"}>
+			google
+		</Button>
 	);
 }

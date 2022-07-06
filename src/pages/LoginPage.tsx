@@ -1,10 +1,15 @@
-import LogIn from "../components/LogIn";
+import { Container, Stack, Typography } from "@mui/material";
+import LogInGoogle from "../components/LogIn";
 
 export const LoginPage = () => {
 	return (
 		<>
-			<h1>Log in</h1>
-			<LogIn />
+			<Container maxWidth="md">
+				<Stack direction={"column"}>
+					<Typography component={"h1"}>Log in</Typography>
+					<LogInGoogle />
+				</Stack>
+			</Container>
 		</>
 	);
 };
