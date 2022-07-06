@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Container, Stack, Typography } from "@mui/material";
+import LogInGoogle from "../components/LogIn";
 
 export const LoginPage = () => {
 	return (
 		<>
-			<h1>Log in</h1>
-			<Link to={"/register"}>rgister</Link>
+			<Container maxWidth="md">
+				<Stack direction={"column"}>
+					<Typography component={"h1"}>Log in</Typography>
+					<LogInGoogle />
+				</Stack>
+			</Container>
 		</>
 	);
 };
