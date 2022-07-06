@@ -1,10 +1,19 @@
 import { getAuth } from "firebase/auth";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserInformation } from "../components/UserInformation";
 
 export const HomePage = () => {
 	const auth = getAuth();
 	const [user] = useAuthState(auth);
-	return <>{user ? <UserInformation /> : <Navigate to={"/login"} />}</>;
+	if (!!user) {
+		return (
+			<>
+				<UserInformation />
+				<Link to={"/chat"}>Chat</Link>
+			</>
+		);
+	} else {
+		return <Navigate to={"/login"} />;
+	}
 };
