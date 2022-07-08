@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { setupStore } from "./store/store";
-import "./fireBase";
 
 const store = setupStore();
 const root = ReactDOM.createRoot(

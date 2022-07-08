@@ -1,38 +1,28 @@
-import React from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { auth, provider } from "../fireBase";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 export default function LogInGoogle() {
 	const navigate = useNavigate();
-	const logInWGoogle = () => {
-		const provider = new GoogleAuthProvider();
-		const auth = getAuth();
-		signInWithPopup(auth, provider)
-			.then((result) => {
-				const credential =
-					GoogleAuthProvider.credentialFromResult(result);
-				const token = credential!.accessToken;
-				const user = result.user;
-
-				console.log(result);
-				navigate("/");
-			})
-			.catch((error) => {
-				// Handle Errors here.
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				// The email of the user's account used.
-				const email = error.customData.email;
-				// The AuthCredential type that was used.
-				const credential =
-					GoogleAuthProvider.credentialFromError(error);
-				console.error(error);
-			});
-	};
+	const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+	if (error) {
+		return (
+			<div>
+				<p>Error: {error.message}</p>
+			</div>
+		);
+	}
+	if (loading) {
+		return <p>Loading...</p>;
+	}
+	if (user) {
+		navigate("/");
+	}
 	return (
-		<Button onClick={logInWGoogle} variant={"contained"}>
-			google
-		</Button>
+		<div>
+			<Button onClick={() => signInWithGoogle()}>Sign In</Button>
+		</div>
 	);
 }

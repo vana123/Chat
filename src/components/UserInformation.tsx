@@ -12,6 +12,8 @@ import {
 	Typography,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import { Chat } from "./Chat/Chat";
+import { useNavigate } from "react-router-dom";
 
 const Img = styled("img")({
 	margin: "auto",
@@ -21,6 +23,7 @@ const Img = styled("img")({
 });
 
 export const UserInformation: React.FC = (): JSX.Element => {
+	const navigate = useNavigate();
 	const auth = getAuth();
 	const [user] = useAuthState(auth);
 	return (
@@ -102,9 +105,17 @@ export const UserInformation: React.FC = (): JSX.Element => {
 							</Grid>
 							<Grid item>
 								<Stack
+									direction={"row"}
 									height={"100%"}
 									justifyContent={"flex-end"}
 								>
+									<Button
+										onClick={() => {
+											navigate("/chat");
+										}}
+									>
+										Chat
+									</Button>
 									<Button
 										onClick={() => {
 											auth.signOut();

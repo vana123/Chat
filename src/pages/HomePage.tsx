@@ -1,10 +1,19 @@
-import { getAuth } from "firebase/auth";
-import { Navigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Navigate, Link } from "react-router-dom";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { UserInformation } from "../components/UserInformation";
+import { auth } from "../fireBase";
 
 export const HomePage = () => {
-	const auth = getAuth();
-	const [user] = useAuthState(auth);
-	return <>{user ? <UserInformation /> : <Navigate to={"/login"} />}</>;
+	const [user, loading, error] = useAuthState(auth);
+	if (!!user) {
+		return (
+			<>
+				<UserInformation />
+			</>
+		);
+	} else if (loading) {
+		return <>Loading...</>;
+	} else {
+		return <Navigate to={"/login"} />;
+	}
 };
