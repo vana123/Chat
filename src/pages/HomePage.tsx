@@ -1,18 +1,18 @@
-import { getAuth } from "firebase/auth";
 import { Navigate, Link } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { UserInformation } from "../components/UserInformation";
+import { auth } from "../fireBase";
 
 export const HomePage = () => {
-	const auth = getAuth();
-	const [user] = useAuthState(auth);
+	const [user, loading, error] = useAuthState(auth);
 	if (!!user) {
 		return (
 			<>
 				<UserInformation />
-				<Link to={"/chat"}>Chat</Link>
 			</>
 		);
+	} else if (loading) {
+		return <>Loading...</>;
 	} else {
 		return <Navigate to={"/login"} />;
 	}
